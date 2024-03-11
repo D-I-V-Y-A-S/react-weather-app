@@ -1,0 +1,49 @@
+.main-container
+{
+    margin:10%;
+}
+.temperature
+{
+    margin:5%;
+    text-align: center;
+    color:white;
+    font-size:xx-large;
+    font-weight: 400px;
+}
+
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    
+  }
+  
+  .search-bar-container input {
+    width:40%;
+    padding:1%;
+    margin-right: 2%;
+    border:2px solid whitesmoke;
+    border-radius: 40px;
+    text-align: center;
+    background-image: url(Component/images/search.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        text-align: center;
+        padding-left:25 px;
+        background-position: 0%;
+  }
+  
+  .search-bar-container button {
+    width: 100px;
+    height: 40px;
+    border:2px solid whitesmoke;
+    border-radius: 40px;
+  }
+  
+.weather-details
+{ 
+    margin: 5%;
+    font-size: xx-large;
+    color: white;
+    text-align: center;
+  
+}
