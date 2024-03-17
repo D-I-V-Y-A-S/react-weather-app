@@ -1,49 +1,62 @@
 .main-container
 {
-    margin:10%;
-}
-.temperature
-{
-    margin:5%;
-    text-align: center;
-    color:white;
-    font-size:xx-large;
-    font-weight: 400px;
+   display:flex;
+   justify-content: center;
+   width:60%;
+   height:auto;
+   flex-direction: column;
+   margin:5% 20% 5% 20%;
+   padding:1%;
+   align-items: center;
 }
 
-.search-bar-container {
-    display: flex;
-    justify-content: center;
-    
-  }
+.input-box
+{
+width:50%;
+padding:2%;
+border:2px solid skyblue;
+background: transparent;
+border-radius: 20px;
+}
+
+input::placeholder
+{
+  text-align: center;
+  color:white;
   
-  .search-bar-container input {
-    width:40%;
-    padding:1%;
-    margin-right: 2%;
-    border:2px solid whitesmoke;
-    border-radius: 40px;
-    text-align: center;
-    background-image: url(Component/images/search.png);
-        background-size: contain;
-        background-repeat: no-repeat;
-        text-align: center;
-        padding-left:25 px;
-        background-position: 0%;
-  }
-  
-  .search-bar-container button {
-    width: 100px;
-    height: 40px;
-    border:2px solid whitesmoke;
-    border-radius: 40px;
-  }
-  
-.weather-details
-{ 
-    margin: 5%;
-    font-size: xx-large;
-    color: white;
-    text-align: center;
-  
+}
+
+.details
+{
+  margin:5%;
+  text-align: center;
+  Padding:2%;
+  width:80%;
+}
+
+.title
+{
+  text-align: center;
+  color:black;
+ margin-top: 5%;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+ 
+}
+
+.align-box
+{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width:30%;
+  justify-content: center;
+  margin:0;
+  border:2px solid gray;
+  border-radius: 10px;
+  margin:5%;
 }

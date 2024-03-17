@@ -8,3 +8,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>,
 )
+
+
+//https://api.weatherapi.com/v1/current.json?key=10ea41c6a5eb4770a2594541241103&q=chennai
