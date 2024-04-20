@@ -12,13 +12,13 @@ const WeatherComponentDetails = ({iterator}) => {
                 
                 <div className="container">
                 <div className="align-box">
-                <h1> <p>Fahrenheit</p>{iterator.current && iterator.current.temp_f}<sup>o</sup>F</h1>
+                <h1> <i>Fahrenheit</i><br/>{iterator.current && iterator.current.temp_f}<sup>o</sup>F</h1>
                 </div>
                 <div className="align-box">
-                <h1><p>Feels Like </p>{iterator.current && iterator.current.temp_c}<sup>o</sup>C</h1>
+                <h1><i>Feels Like </i><br/>{iterator.current && iterator.current.temp_c}<sup>o</sup>C</h1>
                 </div>
                 <div className="align-box">
-                <h1><p>Humidity</p>{iterator.current && iterator.current.humidity}</h1>
+                <h1><i>Humidity</i><br/>{iterator.current && iterator.current.humidity}</h1>
                 </div>
                 </div>
 

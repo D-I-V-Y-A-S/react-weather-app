@@ -1,13 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import './WeatherComponent.css'
+import './WeatherQueryComponent.css'
 import { useQuery } from 'react-query'
 import WeatherComponentDetails from '../WeatherComponentDetails/WeatherComponentDetails'
-
-const WeatherComponent = () => {
-
+const WeatherQueryComponent = () => {
     const API_KEY = "10ea41c6a5eb4770a2594541241103"
-    const [cityName, setcityName] = useState('')
+    const [cityName, setCityName] = useState('')
+    const[location,setLocation]=useState('')
     const [latitude, setLatitude] = useState(0)
     const [longitude, setLongitude] = useState(0)
 
@@ -22,35 +21,27 @@ const WeatherComponent = () => {
 
     // const { data: initialData, isLoading: isInitialLoading, isError: isInitialError } = useQuery(['weather-detail', latitude, longitude], fetchMyLocationWeather)
 
-    const {data:initialData,isLoading:isInitialLoading,isError:isInitialError}=useQuery(['weather-detail',longitude,latitude],fetchMyLocationWeather)
+    const { data, isLoading, isError } = useQuery(['weather-detail', latitude, longitude], fetchMyLocationWeather)
+
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
+
+    if (isError) {
+        return <div>error...</div>
+    }
 
     // useEffect(() => {
     //     fetchMyLocationWeather()
     // }, [latitude,longitude])
 
     const handleCityName = (event) => {
-        setcityName(event.target.value)
+        setCityName(event.target.value)
     }
-
-
-    const { data: cityData, refetch: refetchgetCityWeather, isLoading: isCityLoading, isError: isCityError } = useQuery(['weather-detail'], async () => {
-        if (cityName) {
+    const getCityWeather = async () => {
             const response = await axios.get(`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${cityName}`);
             console.log(response.data);
-            return response.data;
-        }
-    }, { keepPreviousData: true });
-    //['weather-detail,cityName]-Dynamic change of city Details.
-
-    if (isInitialLoading || isCityLoading) {
-        return <div>Loading...</div>
-    }
-
-    if (isInitialError || isCityError) {
-        return <div>error...</div>
-    }
-    const getCityWeather = () => {
-        refetchgetCityWeather()
+            setLocation(response.data)
     }
     return (
         <React.Fragment>
@@ -70,12 +61,17 @@ const WeatherComponent = () => {
                         }
                     }}
                 />
+
                 {/* <button onClick={getCityWeather}>GetData</button>  */}
-                {!cityData && initialData && <WeatherComponentDetails iterator={initialData} />}
-                {cityData && <WeatherComponentDetails iterator={cityData} />}
+            
+
+            {!location&&data&&<WeatherComponentDetails iterator={data}/>}
+            {location&&<WeatherComponentDetails iterator={location}/>}
+                
 
             </section>
         </React.Fragment>
     )
 }
-export default WeatherComponent
+
+export default WeatherQueryComponent

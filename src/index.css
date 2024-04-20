@@ -4,8 +4,10 @@
 }
 
 body {
-    background: url('Component/images/cloud.avif') no-repeat;
+    background-image: url('Component/images/cloud.avif') ;
+    background-repeat:no-repeat;
     background-size: cover;
     margin:0px;
     color:white;
+    border:white 2px solid;
 }
