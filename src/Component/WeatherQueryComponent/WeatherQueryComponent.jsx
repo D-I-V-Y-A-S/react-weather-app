@@ -3,23 +3,38 @@ import React, { useEffect, useState } from 'react'
 import './WeatherQueryComponent.css'
 import { useQuery } from 'react-query'
 import WeatherComponentDetails from '../WeatherComponentDetails/WeatherComponentDetails'
+
 const WeatherQueryComponent = () => {
     const API_KEY = "10ea41c6a5eb4770a2594541241103"
+
     const [cityName, setCityName] = useState('')
-    const[location,setLocation]=useState('')
+    const [location, setLocation] = useState('')
+
+    //current location
     const [latitude, setLatitude] = useState(0)
     const [longitude, setLongitude] = useState(0)
 
     const fetchMyLocationWeather = async () => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            setLatitude(position.coords.latitude)
-            setLongitude(position.coords.longitude)
-        })
-        const response = await axios.get(`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${latitude},${longitude}`)
-        return response.data
-    }
+        try {
+            const position = await new Promise((resolve, reject) => {
+                navigator.geolocation.getCurrentPosition(resolve, reject);
+            });
 
-    // const { data: initialData, isLoading: isInitialLoading, isError: isInitialError } = useQuery(['weather-detail', latitude, longitude], fetchMyLocationWeather)
+            setLatitude(position.coords.latitude);
+            setLongitude(position.coords.longitude);
+
+            if (latitude && longitude) {
+                const response = await axios.get(`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${latitude},${longitude}`);
+                return (response.data);
+            }
+            else {
+                throw new Error("Failed to retrieve latitude and longitude");
+            }
+        }
+        catch (error) {
+            console.error("Error fetching weather:", error);
+        }
+    };
 
     const { data, isLoading, isError } = useQuery(['weather-detail', latitude, longitude], fetchMyLocationWeather)
 
@@ -31,17 +46,13 @@ const WeatherQueryComponent = () => {
         return <div>error...</div>
     }
 
-    // useEffect(() => {
-    //     fetchMyLocationWeather()
-    // }, [latitude,longitude])
-
     const handleCityName = (event) => {
         setCityName(event.target.value)
     }
     const getCityWeather = async () => {
-            const response = await axios.get(`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${cityName}`);
-            console.log(response.data);
-            setLocation(response.data)
+        const response = await axios.get(`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${cityName}`);
+        console.log(response.data);
+        setLocation(response.data)
     }
     return (
         <React.Fragment>
@@ -56,18 +67,14 @@ const WeatherQueryComponent = () => {
                     onChange={handleCityName}
                     onKeyDown={(event) => {
                         if (event.key === 'Enter') {
-                            // event.preventDefault()
+                            event.preventDefault()
                             getCityWeather();
                         }
                     }}
                 />
-
-                {/* <button onClick={getCityWeather}>GetData</button>  */}
-            
-
-            {!location&&data&&<WeatherComponentDetails iterator={data}/>}
-            {location&&<WeatherComponentDetails iterator={location}/>}
-                
+         
+                {!location && data && <WeatherComponentDetails iterator={data} />}
+                {location && <WeatherComponentDetails iterator={location} />}
 
             </section>
         </React.Fragment>

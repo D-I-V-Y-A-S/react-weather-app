@@ -16,12 +16,18 @@ width:50%;
 margin-top: 2%;
 padding:2%;
 background: transparent;
+outline:none;
+border:none;
+border-radius: 20px;
+color:black;
+background-color: white;
 }
 
 input::placeholder
 {
   text-align: center;
-  color:white;
+  color:black;
+
   
 }
 

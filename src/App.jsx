@@ -1,5 +1,4 @@
 import React from 'react'
-import WeatherComponent from './Component/WeatherComponent/WeatherComponent'
 import { QueryClientProvider, QueryClient } from 'react-query'
 import WeatherQueryComponent from './Component/WeatherQueryComponent/WeatherQueryComponent'
 function App() {
@@ -7,8 +6,7 @@ function App() {
   return (
     <React.Fragment>
       <QueryClientProvider client={queryClient}>
-        <WeatherComponent />
-        {/* <WeatherQueryComponent/> */}
+        <WeatherQueryComponent />
       </QueryClientProvider>
     </React.Fragment>
   )
